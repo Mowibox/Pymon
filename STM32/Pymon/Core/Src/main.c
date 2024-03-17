@@ -94,8 +94,6 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start(&htim1);
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   uint8_t buf;
   Buzzer_InitTypeDef buzzerConfig;
   buzzerConfig.channel = TIM_CHANNEL_1;
@@ -111,31 +109,37 @@ int main(void)
   {
 
 
-	HAL_UART_Receive(&huart2, &buf, 1, 1000);
-	if (buf == 'r'){
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
-		Buzzer_Note(&hbuzzer, NOTE_C4);
-	}
-	else if (buf == 'y'){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
-		Buzzer_Note(&hbuzzer, NOTE_D4);
-	}
-	else if (buf == 'g'){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
-		Buzzer_Note(&hbuzzer, NOTE_E4);
-	}
-	else if (buf == 'b'){
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-		Buzzer_Note(&hbuzzer, NOTE_F4);
-	}
-	else if (buf == 'n'){
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
-		Buzzer_Note(&hbuzzer, 0);
+	  //Data reception
+	  HAL_UART_Receive(&huart2, &buf, 1, 1000);
 
-	}
+	  //Red color
+	  if (buf == 'r'){
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+		  Buzzer_Note(&hbuzzer, NOTE_C4);
+	  }
+	  //Yellow color
+	  else if (buf == 'y'){
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+		  Buzzer_Note(&hbuzzer, NOTE_D4);
+	  }
+	  //Green color
+	  else if (buf == 'g'){
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
+		  Buzzer_Note(&hbuzzer, NOTE_E4);
+	  }
+	  //Blue color
+	  else if (buf == 'b'){
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+		  Buzzer_Note(&hbuzzer, NOTE_F4);
+	  }
+	  //None
+	  else if (buf == 'n'){
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+		  Buzzer_Note(&hbuzzer, 0);
+	  }
 
 
     /* USER CODE END WHILE */
