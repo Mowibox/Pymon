@@ -13,7 +13,7 @@ numberOfLives = 3
 level = 1
 canPlay = False
 listAppend = True
-
+lifeColor = (0, 255, 0)
 
 # Ouverture de la communication serie avec la STM32
 ser = serial.Serial("COM25", baudrate=38400)
@@ -60,6 +60,7 @@ cv2.namedWindow('Pymon', cv2.WINDOW_NORMAL)
 scene.set(3, 1280)
 
 
+
 # Classe pour la gestion des boutons de selection
 class Button:
     def __init__(self, x, y, width, height, text=None):
@@ -101,6 +102,9 @@ class Text:
 
     def update_text(self, text):
         self.text = text
+
+    def update_color(self, color):
+        self.color = color
         
 
 
@@ -114,9 +118,12 @@ GreenButton = Button(50, 550, 250, 150, 'Green')
 BlueButton = Button(960, 550, 250, 150, 'Blue')
 
 gameText = Text(370, 400, "Regardez la sequence lumineuse...")
-levelText = Text(540, 700, "Niveau : {}".format(level))
-livesText = Text(540, 50, "Vies : {}".format(numberOfLives))
+levelText = Text(560, 560, "Niveau : {}".format(level), color=(0, 0, 0))
+livesText = Text(560, 50, "Vies : {}".format(numberOfLives))
 
+#Logo 
+logo = cv2.imread('Python\img\Pymonlogo.png')
+logo = cv2.resize(logo, (150,150))
 
 # Affichage
 while scene.isOpened():
@@ -158,13 +165,14 @@ while scene.isOpened():
                     y_min = y
                 if y > y_max:
                     y_max = y
-            cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 6)
+            cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (255, 0, 200), 6)
             hand_rect = Button(x_min, y_min, x_max - x_min, y_max - y_min) 
 
-    # Cheevauchement
+    # Chevauchement
     if gameScene == 0:
         if hand_rect is not None:
             if StartButton.intersects(hand_rect):
+                ser.write(b'n')
                 StartButton.draw(frame, (255, 0, 255)) 
                 if time_elapsed is None:
                     time_elapsed = time.time()  
@@ -174,9 +182,12 @@ while scene.isOpened():
             else:
                 StartButton.draw(frame, (0, 0, 0))
                 time_elapsed = None
+        else:
+            ser.write(b'm')
                 
         if hand_rect is not None:
             if SettingsButton.intersects(hand_rect):
+                ser.write(b'n')
                 SettingsButton.draw(frame, (255, 0, 255))
                 if time_elapsed is None:
                     time_elapsed = time.time()  
@@ -185,17 +196,22 @@ while scene.isOpened():
                     time_elapsed = None    
             else:
                 SettingsButton.draw(frame, (0, 0, 0))
+        else:
+            ser.write(b'm')
 
     if gameScene == 1 and not(canPlay):
+        gameText.update_color((250, 250, 250))
         gameText.update_text("Regardez la sequence lumineuse...")
         levelText.update_text("Niveau : {}".format(level))
         livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_color(lifeColor)
         livesText.draw(frame)
         levelText.draw(frame)
         gameText.draw(frame)
         if time_elapsed is None:
+                ser.write(b'n')
                 time_elapsed = time.time()  
-        elif time.time() - time_elapsed > 2:  
+        elif time.time() - time_elapsed > 3:  
             time_elapsed = None
             memoryList = memorylistMake(level)
             for i in range(len(memoryList)):
@@ -210,6 +226,7 @@ while scene.isOpened():
     if gameScene == 1 and canPlay:
         levelText.update_text("Niveau : {}".format(level))
         livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_color(lifeColor)
         livesText.draw(frame)
         levelText.draw(frame)
         status = listCompare(playerList, memoryList)
@@ -221,6 +238,7 @@ while scene.isOpened():
                 gameScene = 5
             else:
                 gameScene = 4
+        gameText.update_color((250, 250, 250))
         gameText.update_text("A vous de jouer !")
         gameText.draw(frame)
         if hand_rect is not None:
@@ -265,7 +283,9 @@ while scene.isOpened():
     if gameScene == 3:
         ser.write(b'n')
         gameText.update_text("Bravo ! Passons au niveau suivant !")
+        gameText.update_color((0, 220, 0))
         livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_color(lifeColor)
         livesText.draw(frame)
         levelText.update_text("Niveau : {}".format(level))
         levelText.draw(frame)
@@ -281,7 +301,9 @@ while scene.isOpened():
     if gameScene == 4:
         ser.write(b'n')
         gameText.update_text("Ce n'est pas ca, Essaie encore...")
+        gameText.update_color((0, 0, 220))
         livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_color(lifeColor)
         livesText.draw(frame)
         levelText.update_text("Niveau : {}".format(level))
         levelText.draw(frame)
@@ -296,29 +318,39 @@ while scene.isOpened():
     if gameScene == 5:
         ser.write(b'n')
         gameText.update_text("GAME OVER...")
+        gameText.update_color((0, 0, 180))
         livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_color(lifeColor)
         livesText.draw(frame)
         levelText.update_text("Niveau : {}".format(level))
         levelText.draw(frame)
         gameText.draw(frame)
         if time_elapsed is None:
                 time_elapsed = time.time()  
-        elif time.time() - time_elapsed > 2:  
+        elif time.time() - time_elapsed > 3:  
             gameScene = 0
             level = 1
             numberOfLives = 3
             canPlay = False
             time_elapsed = None
         
+    # Coloration du texte des vies
+    if numberOfLives == 3:
+        lifeColor = (0, 255, 0)
+    elif numberOfLives == 2:
+        lifeColor = (0, 255, 255)
+    elif numberOfLives == 1:
+        lifeColor = (0, 0, 255)
 
-    #Centrage du texte principal
+    # Centrage du texte principal
     text_size = cv2.getTextSize(gameText.text, cv2.FONT_HERSHEY_SIMPLEX, gameText.font_scale, 2)[0]
     text_x = (frame.shape[1] - text_size[0]) // 2
     text_y = (frame.shape[0] + text_size[1]) // 2
     gameText.x = text_x
     gameText.y = text_y
 
-       
+    # Affichage du logo
+    frame[570:570+logo.shape[0], 565:565+logo.shape[1]] = logo 
            
     # Titre du jeu
     cv2.imshow('Pymon', frame)
