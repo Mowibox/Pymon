@@ -183,22 +183,22 @@ int main(void)
 
 	  //Red color
 	  if (buf == 'r'){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_C4);
 	  }
 	  //Yellow color
 	  else if (buf == 'y'){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_D4);
 	  }
 	  //Green color
 	  else if (buf == 'g'){
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_E4);
 	  }
 	  //Blue color
 	  else if (buf == 'b'){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_F4);
 	  }
 	  //None
