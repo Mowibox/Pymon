@@ -7,18 +7,19 @@ import serial.tools.list_ports
 
 
 # Variables 
-gameScene = 0
-time_elapsed = None
-numberOfLives = 3
-level = 1
-canPlay = False
-listAppend = True
-lifeColor = (0, 255, 0)
+gameScene = 0               # Gestion de l'etat du jeu
+time_elapsed = None         # Variable temporelle
+numberOfLives = 3           # Nombre de vies 
+level = 1                   # Niveau
+canPlay = False             # Possibilite de jouer ou non
+listAppend = True           # Ajout d'elements dans la sequence utilisateur
+lifeColor = (0, 255, 0)     # Couleur des points de vies 
+mirrorMode = False
 
 # Ouverture de la communication serie avec la STM32
 ser = serial.Serial("COM25", baudrate=38400)
 
-# Formation de la suite aleatoire
+# Formation de la suite aleatoire a deviner
 def memorylistMake(level):
     memoryList = []
     for i in range(level+2):
@@ -39,7 +40,7 @@ def listCompare(playerList, memoryList):
     if n != 0:
         if playerList[n-1] == memoryList[n-1]:
             if n == len(memoryList):
-                return 1 # Niveau réussi
+                return 1 # Niveau reussi
             else:
                 return 0 # Pas d'erreurs, le jeu continue
         else:
@@ -58,8 +59,6 @@ scene = cv2.VideoCapture(0)
 # Dimensionnement de la fenêtre
 cv2.namedWindow('Pymon', cv2.WINDOW_NORMAL)
 scene.set(3, 1280)
-
-
 
 # Classe pour la gestion des boutons de selection
 class Button:
@@ -112,6 +111,10 @@ class Text:
 StartButton = Button(60, 50, 250, 150, 'Start')
 SettingsButton = Button(950, 50, 250, 150, 'Settings')
 
+PlayerButton = Button(60, 50, 250, 150, 'Joueur')
+BackButton = Button(60, 550, 250, 150, 'Retour')
+RankingButton = Button(950, 550, 250, 150, 'Score')
+
 RedButton = Button(50, 30, 250, 150, 'Red')
 YellowButton = Button(960, 30, 250, 150, 'Yellow')
 GreenButton = Button(50, 550, 250, 150, 'Green')
@@ -125,14 +128,17 @@ livesText = Text(560, 50, "Vies : {}".format(numberOfLives))
 logo = cv2.imread('Python\img\Pymonlogo.png')
 logo = cv2.resize(logo, (150,150))
 
-# Affichage
+# Affichage de la scene
 while scene.isOpened():
     ret, frame = scene.read()
     if not ret:
         break
 
     # Miroitage de la scene
-    frame = cv2.flip(frame, 1)
+    if mirrorMode:
+        frame = cv2.flip(frame, -1)
+    else:
+        frame = cv2.flip(frame, 1)
 
     # Menu
     if gameScene == 0 :
@@ -144,13 +150,17 @@ while scene.isOpened():
         YellowButton.draw(frame, (0, 255, 255))
         GreenButton.draw(frame, (0, 255, 0))
         BlueButton.draw(frame, (255, 0, 0))
+    
+    if gameScene == 2:
+        RankingButton.draw(frame, (0, 0, 0))
+        PlayerButton.draw(frame, (0, 0, 0))
+        BackButton.draw(frame, (0, 0, 0))
 
     # Detection des mains
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = hands.process(gray)
 
     hand_rect = None  # Initialisation du rectangle de selection
-
     # Dessin de rectangle de selection
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
@@ -176,12 +186,12 @@ while scene.isOpened():
                 StartButton.draw(frame, (255, 0, 255)) 
                 if time_elapsed is None:
                     time_elapsed = time.time()  
-                elif time.time() - time_elapsed > 2:  
-                    gameScene = 1 # Jeu
-                    time_elapsed = None      
+                elif time.time() - time_elapsed > 2:
+                    time_elapsed = None  
+                    gameScene = 1 # Jeu   
             else:
                 StartButton.draw(frame, (0, 0, 0))
-                time_elapsed = None
+                
         else:
             ser.write(b'm')
                 
@@ -191,16 +201,19 @@ while scene.isOpened():
                 SettingsButton.draw(frame, (255, 0, 255))
                 if time_elapsed is None:
                     time_elapsed = time.time()  
-                elif time.time() - time_elapsed > 2:  
+                elif time.time() - time_elapsed > 2:
+                    time_elapsed = None  
                     gameScene = 2 # Paramètres
-                    time_elapsed = None    
+                    
             else:
                 SettingsButton.draw(frame, (0, 0, 0))
+                
         else:
+            time_elapsed = None
             ser.write(b'm')
 
     if gameScene == 1 and not(canPlay):
-        gameText.update_color((250, 250, 250))
+        gameText.update_color((0, 0, 0))
         gameText.update_text("Regardez la sequence lumineuse...")
         levelText.update_text("Niveau : {}".format(level))
         livesText.update_text("Vies : {}".format(numberOfLives))
@@ -208,6 +221,8 @@ while scene.isOpened():
         livesText.draw(frame)
         levelText.draw(frame)
         gameText.draw(frame)
+
+        #  Creation de la sequence a realiser
         if time_elapsed is None:
                 ser.write(b'n')
                 time_elapsed = time.time()  
@@ -229,19 +244,20 @@ while scene.isOpened():
         livesText.update_color(lifeColor)
         livesText.draw(frame)
         levelText.draw(frame)
-        status = listCompare(playerList, memoryList)
-        if status == 1: # Niveau complété
+
+        status = listCompare(playerList, memoryList) # Verification de l'etat du niveau
+        if status == 1: # Niveau reussi
             gameScene = 3
         elif status == 2: # Erreur !
             numberOfLives-=1
-            if numberOfLives <= 0:
+            if numberOfLives <= 0: # GAME OVER
                 gameScene = 5
             else:
                 gameScene = 4
-        gameText.update_color((250, 250, 250))
+        gameText.update_color((0, 0, 0))
         gameText.update_text("A vous de jouer !")
         gameText.draw(frame)
-        if hand_rect is not None:
+        if hand_rect is not None: # Contact rouge 
             if RedButton.intersects(hand_rect):
                 RedButton.draw(frame, (255, 0, 255))
                 if listAppend:
@@ -249,14 +265,14 @@ while scene.isOpened():
                     listAppend = False
                 ser.write(b'r')   
 
-            elif YellowButton.intersects(hand_rect):
+            elif YellowButton.intersects(hand_rect): # Contact jaune 
                 YellowButton.draw(frame, (255, 0, 255)) 
                 if listAppend:
                     playerList.append(b'y') 
                     listAppend = False
                 ser.write(b'y')  
          
-            elif GreenButton.intersects(hand_rect):
+            elif GreenButton.intersects(hand_rect): # Contact vert
                 GreenButton.draw(frame, (255, 0, 255)) 
                 if listAppend:
                     playerList.append(b'g') 
@@ -264,14 +280,14 @@ while scene.isOpened():
                 ser.write(b'g') 
    
 
-            elif BlueButton.intersects(hand_rect):
+            elif BlueButton.intersects(hand_rect): # Contact bleu
                 BlueButton.draw(frame, (255, 0, 255)) 
                 if listAppend:
                     playerList.append(b'b') 
                     listAppend = False
                 ser.write(b'b')             
   
-            else:
+            else:  
                 RedButton.draw(frame, (0, 0, 255))
                 YellowButton.draw(frame, (0, 255, 255))
                 GreenButton.draw(frame, (0, 255, 0))
@@ -279,8 +295,49 @@ while scene.isOpened():
                 if not(listAppend):
                     listAppend = True
                 ser.write(b'n')
+    
+    if gameScene == 2:
+        if hand_rect is not None:
+            if BackButton.intersects(hand_rect):
+                ser.write(b'n')
+                BackButton.draw(frame, (255, 0, 255)) 
+                if time_elapsed is None:
+                    time_elapsed = time.time()  
+                elif time.time() - time_elapsed > 2:  
+                    time_elapsed = None
+                    gameScene = 0 # Retour au menu 
+            else:
+                BackButton.draw(frame, (0, 0, 0))
 
-    if gameScene == 3:
+
+        elif hand_rect is not None:
+            if BackButton.intersects(hand_rect):
+                ser.write(b'n')
+                BackButton.draw(frame, (255, 0, 255)) 
+                if time_elapsed is None:
+                    time_elapsed = time.time()  
+                elif time.time() - time_elapsed > 2:  
+                    time_elapsed = None
+                    gameScene = 0 # Jeu  
+            else:
+                BackButton.draw(frame, (0, 0, 0))
+        elif hand_rect is not None:
+            if BackButton.intersects(hand_rect):
+                ser.write(b'n')
+                BackButton.draw(frame, (255, 0, 255)) 
+                if time_elapsed is None:
+                    time_elapsed = time.time()  
+                elif time.time() - time_elapsed > 2:  
+                    time_elapsed = None
+                    gameScene = 0 # Jeu  
+            else:
+                BackButton.draw(frame, (0, 0, 0))
+                
+        else:
+            time_elapsed = None
+            ser.write(b'm')
+
+    if gameScene == 3:  # Niveau complet
         ser.write(b'n')
         gameText.update_text("Bravo ! Passons au niveau suivant !")
         gameText.update_color((0, 220, 0))
