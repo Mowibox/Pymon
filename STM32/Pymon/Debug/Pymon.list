@@ -394,25 +394,25 @@ int main(void)
  80003aa:	f7ff ffce 	bl	800034a <Buzzer_Start>
 
   //Boot sequence
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
  80003ae:	2201      	movs	r2, #1
- 80003b0:	2180      	movs	r1, #128	; 0x80
- 80003b2:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80003b6:	f001 f873 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 80003ba:	2200      	movs	r2, #0
- 80003bc:	2101      	movs	r1, #1
- 80003be:	48b3      	ldr	r0, [pc, #716]	; (800068c <main+0x31c>)
- 80003c0:	f001 f86e 	bl	80014a0 <HAL_GPIO_WritePin>
+ 80003b0:	2102      	movs	r1, #2
+ 80003b2:	48b6      	ldr	r0, [pc, #728]	; (800068c <main+0x31c>)
+ 80003b4:	f001 f874 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 80003b8:	2200      	movs	r2, #0
+ 80003ba:	2102      	movs	r1, #2
+ 80003bc:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80003c0:	f001 f86e 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
  80003c4:	2200      	movs	r2, #0
- 80003c6:	2102      	movs	r1, #2
- 80003c8:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80003cc:	f001 f868 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80003d0:	2200      	movs	r2, #0
- 80003d2:	2102      	movs	r1, #2
- 80003d4:	48ae      	ldr	r0, [pc, #696]	; (8000690 <main+0x320>)
+ 80003c6:	2101      	movs	r1, #1
+ 80003c8:	48b1      	ldr	r0, [pc, #708]	; (8000690 <main+0x320>)
+ 80003ca:	f001 f869 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80003ce:	2200      	movs	r2, #0
+ 80003d0:	2180      	movs	r1, #128	; 0x80
+ 80003d2:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80003d6:	f001 f863 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_C4);
  80003da:	f44f 7183 	mov.w	r1, #262	; 0x106
@@ -422,25 +422,25 @@ int main(void)
  80003e4:	20c8      	movs	r0, #200	; 0xc8
  80003e6:	f000 fddf 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 80003ea:	2200      	movs	r2, #0
- 80003ec:	2180      	movs	r1, #128	; 0x80
- 80003ee:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80003f2:	f001 f855 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
- 80003f6:	2201      	movs	r2, #1
- 80003f8:	2101      	movs	r1, #1
- 80003fa:	48a4      	ldr	r0, [pc, #656]	; (800068c <main+0x31c>)
- 80003fc:	f001 f850 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
- 8000400:	2200      	movs	r2, #0
- 8000402:	2102      	movs	r1, #2
- 8000404:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000408:	f001 f84a 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 800040c:	2200      	movs	r2, #0
- 800040e:	2102      	movs	r1, #2
- 8000410:	489f      	ldr	r0, [pc, #636]	; (8000690 <main+0x320>)
+ 80003ea:	2200      	movs	r2, #0
+ 80003ec:	2102      	movs	r1, #2
+ 80003ee:	48a7      	ldr	r0, [pc, #668]	; (800068c <main+0x31c>)
+ 80003f0:	f001 f856 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 80003f4:	2201      	movs	r2, #1
+ 80003f6:	2102      	movs	r1, #2
+ 80003f8:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80003fc:	f001 f850 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+ 8000400:	2200      	movs	r2, #0
+ 8000402:	2101      	movs	r1, #1
+ 8000404:	48a2      	ldr	r0, [pc, #648]	; (8000690 <main+0x320>)
+ 8000406:	f001 f84b 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 800040a:	2200      	movs	r2, #0
+ 800040c:	2180      	movs	r1, #128	; 0x80
+ 800040e:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  8000412:	f001 f845 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_D4);
  8000416:	f44f 7193 	mov.w	r1, #294	; 0x126
@@ -450,25 +450,25 @@ int main(void)
  8000420:	20c8      	movs	r0, #200	; 0xc8
  8000422:	f000 fdc1 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 8000426:	2200      	movs	r2, #0
- 8000428:	2180      	movs	r1, #128	; 0x80
- 800042a:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800042e:	f001 f837 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 8000432:	2200      	movs	r2, #0
- 8000434:	2101      	movs	r1, #1
- 8000436:	4895      	ldr	r0, [pc, #596]	; (800068c <main+0x31c>)
- 8000438:	f001 f832 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
- 800043c:	2201      	movs	r2, #1
- 800043e:	2102      	movs	r1, #2
- 8000440:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000444:	f001 f82c 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 8000448:	2200      	movs	r2, #0
- 800044a:	2102      	movs	r1, #2
- 800044c:	4890      	ldr	r0, [pc, #576]	; (8000690 <main+0x320>)
+ 8000426:	2200      	movs	r2, #0
+ 8000428:	2102      	movs	r1, #2
+ 800042a:	4898      	ldr	r0, [pc, #608]	; (800068c <main+0x31c>)
+ 800042c:	f001 f838 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 8000430:	2200      	movs	r2, #0
+ 8000432:	2102      	movs	r1, #2
+ 8000434:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000438:	f001 f832 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+ 800043c:	2201      	movs	r2, #1
+ 800043e:	2101      	movs	r1, #1
+ 8000440:	4893      	ldr	r0, [pc, #588]	; (8000690 <main+0x320>)
+ 8000442:	f001 f82d 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 8000446:	2200      	movs	r2, #0
+ 8000448:	2180      	movs	r1, #128	; 0x80
+ 800044a:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800044e:	f001 f827 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_E4);
  8000452:	f44f 71a5 	mov.w	r1, #330	; 0x14a
@@ -478,25 +478,25 @@ int main(void)
  800045c:	20c8      	movs	r0, #200	; 0xc8
  800045e:	f000 fda3 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
  8000462:	2200      	movs	r2, #0
- 8000464:	2180      	movs	r1, #128	; 0x80
- 8000466:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800046a:	f001 f819 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 800046e:	2200      	movs	r2, #0
- 8000470:	2101      	movs	r1, #1
- 8000472:	4886      	ldr	r0, [pc, #536]	; (800068c <main+0x31c>)
- 8000474:	f001 f814 	bl	80014a0 <HAL_GPIO_WritePin>
+ 8000464:	2102      	movs	r1, #2
+ 8000466:	4889      	ldr	r0, [pc, #548]	; (800068c <main+0x31c>)
+ 8000468:	f001 f81a 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 800046c:	2200      	movs	r2, #0
+ 800046e:	2102      	movs	r1, #2
+ 8000470:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000474:	f001 f814 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
  8000478:	2200      	movs	r2, #0
- 800047a:	2102      	movs	r1, #2
- 800047c:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000480:	f001 f80e 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
- 8000484:	2201      	movs	r2, #1
- 8000486:	2102      	movs	r1, #2
- 8000488:	4881      	ldr	r0, [pc, #516]	; (8000690 <main+0x320>)
+ 800047a:	2101      	movs	r1, #1
+ 800047c:	4884      	ldr	r0, [pc, #528]	; (8000690 <main+0x320>)
+ 800047e:	f001 f80f 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+ 8000482:	2201      	movs	r2, #1
+ 8000484:	2180      	movs	r1, #128	; 0x80
+ 8000486:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800048a:	f001 f809 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_F4);
  800048e:	f240 115d 	movw	r1, #349	; 0x15d
@@ -506,25 +506,25 @@ int main(void)
  8000498:	20c8      	movs	r0, #200	; 0xc8
  800049a:	f000 fd85 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
  800049e:	2201      	movs	r2, #1
- 80004a0:	2180      	movs	r1, #128	; 0x80
- 80004a2:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80004a6:	f000 fffb 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 80004aa:	2200      	movs	r2, #0
- 80004ac:	2101      	movs	r1, #1
- 80004ae:	4877      	ldr	r0, [pc, #476]	; (800068c <main+0x31c>)
- 80004b0:	f000 fff6 	bl	80014a0 <HAL_GPIO_WritePin>
+ 80004a0:	2102      	movs	r1, #2
+ 80004a2:	487a      	ldr	r0, [pc, #488]	; (800068c <main+0x31c>)
+ 80004a4:	f000 fffc 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 80004a8:	2200      	movs	r2, #0
+ 80004aa:	2102      	movs	r1, #2
+ 80004ac:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80004b0:	f000 fff6 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
  80004b4:	2200      	movs	r2, #0
- 80004b6:	2102      	movs	r1, #2
- 80004b8:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80004bc:	f000 fff0 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80004c0:	2200      	movs	r2, #0
- 80004c2:	2102      	movs	r1, #2
- 80004c4:	4872      	ldr	r0, [pc, #456]	; (8000690 <main+0x320>)
+ 80004b6:	2101      	movs	r1, #1
+ 80004b8:	4875      	ldr	r0, [pc, #468]	; (8000690 <main+0x320>)
+ 80004ba:	f000 fff1 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80004be:	2200      	movs	r2, #0
+ 80004c0:	2180      	movs	r1, #128	; 0x80
+ 80004c2:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80004c6:	f000 ffeb 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_G4);
  80004ca:	f44f 71c4 	mov.w	r1, #392	; 0x188
@@ -534,25 +534,25 @@ int main(void)
  80004d4:	20c8      	movs	r0, #200	; 0xc8
  80004d6:	f000 fd67 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
  80004da:	2201      	movs	r2, #1
- 80004dc:	2180      	movs	r1, #128	; 0x80
- 80004de:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80004e2:	f000 ffdd 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
- 80004e6:	2201      	movs	r2, #1
- 80004e8:	2101      	movs	r1, #1
- 80004ea:	4868      	ldr	r0, [pc, #416]	; (800068c <main+0x31c>)
+ 80004dc:	2102      	movs	r1, #2
+ 80004de:	486b      	ldr	r0, [pc, #428]	; (800068c <main+0x31c>)
+ 80004e0:	f000 ffde 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 80004e4:	2201      	movs	r2, #1
+ 80004e6:	2102      	movs	r1, #2
+ 80004e8:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80004ec:	f000 ffd8 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
  80004f0:	2200      	movs	r2, #0
- 80004f2:	2102      	movs	r1, #2
- 80004f4:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80004f8:	f000 ffd2 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80004fc:	2200      	movs	r2, #0
- 80004fe:	2102      	movs	r1, #2
- 8000500:	4863      	ldr	r0, [pc, #396]	; (8000690 <main+0x320>)
+ 80004f2:	2101      	movs	r1, #1
+ 80004f4:	4866      	ldr	r0, [pc, #408]	; (8000690 <main+0x320>)
+ 80004f6:	f000 ffd3 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80004fa:	2200      	movs	r2, #0
+ 80004fc:	2180      	movs	r1, #128	; 0x80
+ 80004fe:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  8000502:	f000 ffcd 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_A4);
  8000506:	f44f 71dc 	mov.w	r1, #440	; 0x1b8
@@ -562,25 +562,25 @@ int main(void)
  8000510:	20c8      	movs	r0, #200	; 0xc8
  8000512:	f000 fd49 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
  8000516:	2201      	movs	r2, #1
- 8000518:	2180      	movs	r1, #128	; 0x80
- 800051a:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800051e:	f000 ffbf 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
- 8000522:	2201      	movs	r2, #1
- 8000524:	2101      	movs	r1, #1
- 8000526:	4859      	ldr	r0, [pc, #356]	; (800068c <main+0x31c>)
- 8000528:	f000 ffba 	bl	80014a0 <HAL_GPIO_WritePin>
+ 8000518:	2102      	movs	r1, #2
+ 800051a:	485c      	ldr	r0, [pc, #368]	; (800068c <main+0x31c>)
+ 800051c:	f000 ffc0 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 8000520:	2201      	movs	r2, #1
+ 8000522:	2102      	movs	r1, #2
+ 8000524:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000528:	f000 ffba 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
  800052c:	2201      	movs	r2, #1
- 800052e:	2102      	movs	r1, #2
- 8000530:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000534:	f000 ffb4 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 8000538:	2200      	movs	r2, #0
- 800053a:	2102      	movs	r1, #2
- 800053c:	4854      	ldr	r0, [pc, #336]	; (8000690 <main+0x320>)
+ 800052e:	2101      	movs	r1, #1
+ 8000530:	4857      	ldr	r0, [pc, #348]	; (8000690 <main+0x320>)
+ 8000532:	f000 ffb5 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 8000536:	2200      	movs	r2, #0
+ 8000538:	2180      	movs	r1, #128	; 0x80
+ 800053a:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800053e:	f000 ffaf 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_B4);
  8000542:	f44f 71f7 	mov.w	r1, #494	; 0x1ee
@@ -590,25 +590,25 @@ int main(void)
  800054c:	20c8      	movs	r0, #200	; 0xc8
  800054e:	f000 fd2b 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
- 8000552:	2201      	movs	r2, #1
- 8000554:	2180      	movs	r1, #128	; 0x80
- 8000556:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800055a:	f000 ffa1 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
- 800055e:	2201      	movs	r2, #1
- 8000560:	2101      	movs	r1, #1
- 8000562:	484a      	ldr	r0, [pc, #296]	; (800068c <main+0x31c>)
- 8000564:	f000 ff9c 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
- 8000568:	2201      	movs	r2, #1
- 800056a:	2102      	movs	r1, #2
- 800056c:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000570:	f000 ff96 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
- 8000574:	2201      	movs	r2, #1
- 8000576:	2102      	movs	r1, #2
- 8000578:	4845      	ldr	r0, [pc, #276]	; (8000690 <main+0x320>)
+ 8000552:	2201      	movs	r2, #1
+ 8000554:	2102      	movs	r1, #2
+ 8000556:	484d      	ldr	r0, [pc, #308]	; (800068c <main+0x31c>)
+ 8000558:	f000 ffa2 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 800055c:	2201      	movs	r2, #1
+ 800055e:	2102      	movs	r1, #2
+ 8000560:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000564:	f000 ff9c 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+ 8000568:	2201      	movs	r2, #1
+ 800056a:	2101      	movs	r1, #1
+ 800056c:	4848      	ldr	r0, [pc, #288]	; (8000690 <main+0x320>)
+ 800056e:	f000 ff97 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+ 8000572:	2201      	movs	r2, #1
+ 8000574:	2180      	movs	r1, #128	; 0x80
+ 8000576:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800057a:	f000 ff91 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, NOTE_C5);
  800057e:	f240 210b 	movw	r1, #523	; 0x20b
@@ -618,25 +618,25 @@ int main(void)
  8000588:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
  800058c:	f000 fd0c 	bl	8000fa8 <HAL_Delay>
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 8000590:	2200      	movs	r2, #0
- 8000592:	2180      	movs	r1, #128	; 0x80
- 8000594:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000598:	f000 ff82 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 800059c:	2200      	movs	r2, #0
- 800059e:	2101      	movs	r1, #1
- 80005a0:	483a      	ldr	r0, [pc, #232]	; (800068c <main+0x31c>)
- 80005a2:	f000 ff7d 	bl	80014a0 <HAL_GPIO_WritePin>
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
- 80005a6:	2200      	movs	r2, #0
- 80005a8:	2102      	movs	r1, #2
- 80005aa:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80005ae:	f000 ff77 	bl	80014a0 <HAL_GPIO_WritePin>
   HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80005b2:	2200      	movs	r2, #0
- 80005b4:	2102      	movs	r1, #2
- 80005b6:	4836      	ldr	r0, [pc, #216]	; (8000690 <main+0x320>)
+ 8000590:	2200      	movs	r2, #0
+ 8000592:	2102      	movs	r1, #2
+ 8000594:	483d      	ldr	r0, [pc, #244]	; (800068c <main+0x31c>)
+ 8000596:	f000 ff83 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 800059a:	2200      	movs	r2, #0
+ 800059c:	2102      	movs	r1, #2
+ 800059e:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80005a2:	f000 ff7d 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+ 80005a6:	2200      	movs	r2, #0
+ 80005a8:	2101      	movs	r1, #1
+ 80005aa:	4839      	ldr	r0, [pc, #228]	; (8000690 <main+0x320>)
+ 80005ac:	f000 ff78 	bl	80014a0 <HAL_GPIO_WritePin>
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80005b0:	2200      	movs	r2, #0
+ 80005b2:	2180      	movs	r1, #128	; 0x80
+ 80005b4:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80005b8:	f000 ff72 	bl	80014a0 <HAL_GPIO_WritePin>
   Buzzer_Note(&hbuzzer, 0);
  80005bc:	2100      	movs	r1, #0
@@ -658,27 +658,27 @@ int main(void)
 	  if (buf == 'r'){
  80005d4:	7bfb      	ldrb	r3, [r7, #15]
  80005d6:	2b72      	cmp	r3, #114	; 0x72
- 80005d8:	d10b      	bne.n	80005f2 <main+0x282>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+ 80005d8:	d10a      	bne.n	80005f0 <main+0x280>
+		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
  80005da:	2201      	movs	r2, #1
- 80005dc:	2180      	movs	r1, #128	; 0x80
- 80005de:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80005e2:	f000 ff5d 	bl	80014a0 <HAL_GPIO_WritePin>
+ 80005dc:	2102      	movs	r1, #2
+ 80005de:	482b      	ldr	r0, [pc, #172]	; (800068c <main+0x31c>)
+ 80005e0:	f000 ff5e 	bl	80014a0 <HAL_GPIO_WritePin>
 		  Buzzer_Note(&hbuzzer, NOTE_C4);
- 80005e6:	f44f 7183 	mov.w	r1, #262	; 0x106
- 80005ea:	4827      	ldr	r0, [pc, #156]	; (8000688 <main+0x318>)
- 80005ec:	f7ff fdec 	bl	80001c8 <Buzzer_Note>
- 80005f0:	e7e8      	b.n	80005c4 <main+0x254>
+ 80005e4:	f44f 7183 	mov.w	r1, #262	; 0x106
+ 80005e8:	4827      	ldr	r0, [pc, #156]	; (8000688 <main+0x318>)
+ 80005ea:	f7ff fded 	bl	80001c8 <Buzzer_Note>
+ 80005ee:	e7e9      	b.n	80005c4 <main+0x254>
 	  }
 	  //Yellow color
 	  else if (buf == 'y'){
- 80005f2:	7bfb      	ldrb	r3, [r7, #15]
- 80005f4:	2b79      	cmp	r3, #121	; 0x79
- 80005f6:	d10a      	bne.n	800060e <main+0x29e>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
- 80005f8:	2201      	movs	r2, #1
- 80005fa:	2101      	movs	r1, #1
- 80005fc:	4823      	ldr	r0, [pc, #140]	; (800068c <main+0x31c>)
+ 80005f0:	7bfb      	ldrb	r3, [r7, #15]
+ 80005f2:	2b79      	cmp	r3, #121	; 0x79
+ 80005f4:	d10b      	bne.n	800060e <main+0x29e>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 80005f6:	2201      	movs	r2, #1
+ 80005f8:	2102      	movs	r1, #2
+ 80005fa:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80005fe:	f000 ff4f 	bl	80014a0 <HAL_GPIO_WritePin>
 		  Buzzer_Note(&hbuzzer, NOTE_D4);
  8000602:	f44f 7193 	mov.w	r1, #294	; 0x126
@@ -690,27 +690,27 @@ int main(void)
 	  else if (buf == 'g'){
  800060e:	7bfb      	ldrb	r3, [r7, #15]
  8000610:	2b67      	cmp	r3, #103	; 0x67
- 8000612:	d10b      	bne.n	800062c <main+0x2bc>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 8000612:	d10a      	bne.n	800062a <main+0x2ba>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
  8000614:	2201      	movs	r2, #1
- 8000616:	2102      	movs	r1, #2
- 8000618:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800061c:	f000 ff40 	bl	80014a0 <HAL_GPIO_WritePin>
+ 8000616:	2101      	movs	r1, #1
+ 8000618:	481d      	ldr	r0, [pc, #116]	; (8000690 <main+0x320>)
+ 800061a:	f000 ff41 	bl	80014a0 <HAL_GPIO_WritePin>
 		  Buzzer_Note(&hbuzzer, NOTE_E4);
- 8000620:	f44f 71a5 	mov.w	r1, #330	; 0x14a
- 8000624:	4818      	ldr	r0, [pc, #96]	; (8000688 <main+0x318>)
- 8000626:	f7ff fdcf 	bl	80001c8 <Buzzer_Note>
- 800062a:	e7cb      	b.n	80005c4 <main+0x254>
+ 800061e:	f44f 71a5 	mov.w	r1, #330	; 0x14a
+ 8000622:	4819      	ldr	r0, [pc, #100]	; (8000688 <main+0x318>)
+ 8000624:	f7ff fdd0 	bl	80001c8 <Buzzer_Note>
+ 8000628:	e7cc      	b.n	80005c4 <main+0x254>
 	  }
 	  //Blue color
 	  else if (buf == 'b'){
- 800062c:	7bfb      	ldrb	r3, [r7, #15]
- 800062e:	2b62      	cmp	r3, #98	; 0x62
- 8000630:	d10a      	bne.n	8000648 <main+0x2d8>
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
- 8000632:	2201      	movs	r2, #1
- 8000634:	2102      	movs	r1, #2
- 8000636:	4816      	ldr	r0, [pc, #88]	; (8000690 <main+0x320>)
+ 800062a:	7bfb      	ldrb	r3, [r7, #15]
+ 800062c:	2b62      	cmp	r3, #98	; 0x62
+ 800062e:	d10b      	bne.n	8000648 <main+0x2d8>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+ 8000630:	2201      	movs	r2, #1
+ 8000632:	2180      	movs	r1, #128	; 0x80
+ 8000634:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  8000638:	f000 ff32 	bl	80014a0 <HAL_GPIO_WritePin>
 		  Buzzer_Note(&hbuzzer, NOTE_F4);
  800063c:	f240 115d 	movw	r1, #349	; 0x15d
@@ -723,25 +723,25 @@ int main(void)
  8000648:	7bfb      	ldrb	r3, [r7, #15]
  800064a:	2b6e      	cmp	r3, #110	; 0x6e
  800064c:	d124      	bne.n	8000698 <main+0x328>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 800064e:	2200      	movs	r2, #0
- 8000650:	2180      	movs	r1, #128	; 0x80
- 8000652:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000656:	f000 ff23 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 800065a:	2200      	movs	r2, #0
- 800065c:	2101      	movs	r1, #1
- 800065e:	480b      	ldr	r0, [pc, #44]	; (800068c <main+0x31c>)
- 8000660:	f000 ff1e 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
- 8000664:	2200      	movs	r2, #0
- 8000666:	2102      	movs	r1, #2
- 8000668:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800066c:	f000 ff18 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 8000670:	2200      	movs	r2, #0
- 8000672:	2102      	movs	r1, #2
- 8000674:	4806      	ldr	r0, [pc, #24]	; (8000690 <main+0x320>)
+ 800064e:	2200      	movs	r2, #0
+ 8000650:	2102      	movs	r1, #2
+ 8000652:	480e      	ldr	r0, [pc, #56]	; (800068c <main+0x31c>)
+ 8000654:	f000 ff24 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 8000658:	2200      	movs	r2, #0
+ 800065a:	2102      	movs	r1, #2
+ 800065c:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000660:	f000 ff1e 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+ 8000664:	2200      	movs	r2, #0
+ 8000666:	2101      	movs	r1, #1
+ 8000668:	4809      	ldr	r0, [pc, #36]	; (8000690 <main+0x320>)
+ 800066a:	f000 ff19 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 800066e:	2200      	movs	r2, #0
+ 8000670:	2180      	movs	r1, #128	; 0x80
+ 8000672:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  8000676:	f000 ff13 	bl	80014a0 <HAL_GPIO_WritePin>
 		  Buzzer_Note(&hbuzzer, 0);
  800067a:	2100      	movs	r1, #0
@@ -750,8 +750,8 @@ int main(void)
  8000682:	e79f      	b.n	80005c4 <main+0x254>
  8000684:	20000088 	.word	0x20000088
  8000688:	20000028 	.word	0x20000028
- 800068c:	48000400 	.word	0x48000400
- 8000690:	48001400 	.word	0x48001400
+ 800068c:	48001400 	.word	0x48001400
+ 8000690:	48000400 	.word	0x48000400
  8000694:	200000d4 	.word	0x200000d4
 	  }
 
@@ -760,169 +760,169 @@ int main(void)
  8000698:	7bfb      	ldrb	r3, [r7, #15]
  800069a:	2b6d      	cmp	r3, #109	; 0x6d
  800069c:	d192      	bne.n	80005c4 <main+0x254>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
  800069e:	2201      	movs	r2, #1
- 80006a0:	2180      	movs	r1, #128	; 0x80
- 80006a2:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80006a6:	f000 fefb 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 80006aa:	2200      	movs	r2, #0
- 80006ac:	2101      	movs	r1, #1
- 80006ae:	4854      	ldr	r0, [pc, #336]	; (8000800 <main+0x490>)
- 80006b0:	f000 fef6 	bl	80014a0 <HAL_GPIO_WritePin>
+ 80006a0:	2102      	movs	r1, #2
+ 80006a2:	4857      	ldr	r0, [pc, #348]	; (8000800 <main+0x490>)
+ 80006a4:	f000 fefc 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 80006a8:	2200      	movs	r2, #0
+ 80006aa:	2102      	movs	r1, #2
+ 80006ac:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80006b0:	f000 fef6 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
  80006b4:	2200      	movs	r2, #0
- 80006b6:	2102      	movs	r1, #2
- 80006b8:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80006bc:	f000 fef0 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80006c0:	2200      	movs	r2, #0
- 80006c2:	2102      	movs	r1, #2
- 80006c4:	484f      	ldr	r0, [pc, #316]	; (8000804 <main+0x494>)
+ 80006b6:	2101      	movs	r1, #1
+ 80006b8:	4852      	ldr	r0, [pc, #328]	; (8000804 <main+0x494>)
+ 80006ba:	f000 fef1 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80006be:	2200      	movs	r2, #0
+ 80006c0:	2180      	movs	r1, #128	; 0x80
+ 80006c2:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80006c6:	f000 feeb 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_Delay(250);
  80006ca:	20fa      	movs	r0, #250	; 0xfa
  80006cc:	f000 fc6c 	bl	8000fa8 <HAL_Delay>
 
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 80006d0:	2200      	movs	r2, #0
- 80006d2:	2180      	movs	r1, #128	; 0x80
- 80006d4:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80006d8:	f000 fee2 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
- 80006dc:	2201      	movs	r2, #1
- 80006de:	2101      	movs	r1, #1
- 80006e0:	4847      	ldr	r0, [pc, #284]	; (8000800 <main+0x490>)
- 80006e2:	f000 fedd 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
- 80006e6:	2200      	movs	r2, #0
- 80006e8:	2102      	movs	r1, #2
- 80006ea:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80006ee:	f000 fed7 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80006f2:	2200      	movs	r2, #0
- 80006f4:	2102      	movs	r1, #2
- 80006f6:	4843      	ldr	r0, [pc, #268]	; (8000804 <main+0x494>)
+ 80006d0:	2200      	movs	r2, #0
+ 80006d2:	2102      	movs	r1, #2
+ 80006d4:	484a      	ldr	r0, [pc, #296]	; (8000800 <main+0x490>)
+ 80006d6:	f000 fee3 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 80006da:	2201      	movs	r2, #1
+ 80006dc:	2102      	movs	r1, #2
+ 80006de:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80006e2:	f000 fedd 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+ 80006e6:	2200      	movs	r2, #0
+ 80006e8:	2101      	movs	r1, #1
+ 80006ea:	4846      	ldr	r0, [pc, #280]	; (8000804 <main+0x494>)
+ 80006ec:	f000 fed8 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80006f0:	2200      	movs	r2, #0
+ 80006f2:	2180      	movs	r1, #128	; 0x80
+ 80006f4:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80006f8:	f000 fed2 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_Delay(250);
  80006fc:	20fa      	movs	r0, #250	; 0xfa
  80006fe:	f000 fc53 	bl	8000fa8 <HAL_Delay>
 
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 8000702:	2200      	movs	r2, #0
- 8000704:	2180      	movs	r1, #128	; 0x80
- 8000706:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800070a:	f000 fec9 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 800070e:	2200      	movs	r2, #0
- 8000710:	2101      	movs	r1, #1
- 8000712:	483b      	ldr	r0, [pc, #236]	; (8000800 <main+0x490>)
- 8000714:	f000 fec4 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
- 8000718:	2201      	movs	r2, #1
- 800071a:	2102      	movs	r1, #2
- 800071c:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000720:	f000 febe 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 8000724:	2200      	movs	r2, #0
- 8000726:	2102      	movs	r1, #2
- 8000728:	4836      	ldr	r0, [pc, #216]	; (8000804 <main+0x494>)
+ 8000702:	2200      	movs	r2, #0
+ 8000704:	2102      	movs	r1, #2
+ 8000706:	483e      	ldr	r0, [pc, #248]	; (8000800 <main+0x490>)
+ 8000708:	f000 feca 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 800070c:	2200      	movs	r2, #0
+ 800070e:	2102      	movs	r1, #2
+ 8000710:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000714:	f000 fec4 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+ 8000718:	2201      	movs	r2, #1
+ 800071a:	2101      	movs	r1, #1
+ 800071c:	4839      	ldr	r0, [pc, #228]	; (8000804 <main+0x494>)
+ 800071e:	f000 febf 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 8000722:	2200      	movs	r2, #0
+ 8000724:	2180      	movs	r1, #128	; 0x80
+ 8000726:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800072a:	f000 feb9 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_Delay(250);
  800072e:	20fa      	movs	r0, #250	; 0xfa
  8000730:	f000 fc3a 	bl	8000fa8 <HAL_Delay>
 
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
  8000734:	2200      	movs	r2, #0
- 8000736:	2180      	movs	r1, #128	; 0x80
- 8000738:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800073c:	f000 feb0 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 8000740:	2200      	movs	r2, #0
- 8000742:	2101      	movs	r1, #1
- 8000744:	482e      	ldr	r0, [pc, #184]	; (8000800 <main+0x490>)
- 8000746:	f000 feab 	bl	80014a0 <HAL_GPIO_WritePin>
+ 8000736:	2102      	movs	r1, #2
+ 8000738:	4831      	ldr	r0, [pc, #196]	; (8000800 <main+0x490>)
+ 800073a:	f000 feb1 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 800073e:	2200      	movs	r2, #0
+ 8000740:	2102      	movs	r1, #2
+ 8000742:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000746:	f000 feab 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
  800074a:	2200      	movs	r2, #0
- 800074c:	2102      	movs	r1, #2
- 800074e:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000752:	f000 fea5 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
- 8000756:	2201      	movs	r2, #1
- 8000758:	2102      	movs	r1, #2
- 800075a:	482a      	ldr	r0, [pc, #168]	; (8000804 <main+0x494>)
+ 800074c:	2101      	movs	r1, #1
+ 800074e:	482d      	ldr	r0, [pc, #180]	; (8000804 <main+0x494>)
+ 8000750:	f000 fea6 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+ 8000754:	2201      	movs	r2, #1
+ 8000756:	2180      	movs	r1, #128	; 0x80
+ 8000758:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800075c:	f000 fea0 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_Delay(250);
  8000760:	20fa      	movs	r0, #250	; 0xfa
  8000762:	f000 fc21 	bl	8000fa8 <HAL_Delay>
 
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 8000766:	2200      	movs	r2, #0
- 8000768:	2180      	movs	r1, #128	; 0x80
- 800076a:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 800076e:	f000 fe97 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 8000772:	2200      	movs	r2, #0
- 8000774:	2101      	movs	r1, #1
- 8000776:	4822      	ldr	r0, [pc, #136]	; (8000800 <main+0x490>)
- 8000778:	f000 fe92 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
- 800077c:	2201      	movs	r2, #1
- 800077e:	2102      	movs	r1, #2
- 8000780:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 8000784:	f000 fe8c 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 8000788:	2200      	movs	r2, #0
- 800078a:	2102      	movs	r1, #2
- 800078c:	481d      	ldr	r0, [pc, #116]	; (8000804 <main+0x494>)
+ 8000766:	2200      	movs	r2, #0
+ 8000768:	2102      	movs	r1, #2
+ 800076a:	4825      	ldr	r0, [pc, #148]	; (8000800 <main+0x490>)
+ 800076c:	f000 fe98 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 8000770:	2200      	movs	r2, #0
+ 8000772:	2102      	movs	r1, #2
+ 8000774:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 8000778:	f000 fe92 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+ 800077c:	2201      	movs	r2, #1
+ 800077e:	2101      	movs	r1, #1
+ 8000780:	4820      	ldr	r0, [pc, #128]	; (8000804 <main+0x494>)
+ 8000782:	f000 fe8d 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 8000786:	2200      	movs	r2, #0
+ 8000788:	2180      	movs	r1, #128	; 0x80
+ 800078a:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  800078e:	f000 fe87 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_Delay(250);
  8000792:	20fa      	movs	r0, #250	; 0xfa
  8000794:	f000 fc08 	bl	8000fa8 <HAL_Delay>
 
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
- 8000798:	2200      	movs	r2, #0
- 800079a:	2180      	movs	r1, #128	; 0x80
- 800079c:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80007a0:	f000 fe7e 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
- 80007a4:	2201      	movs	r2, #1
- 80007a6:	2101      	movs	r1, #1
- 80007a8:	4815      	ldr	r0, [pc, #84]	; (8000800 <main+0x490>)
- 80007aa:	f000 fe79 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
- 80007ae:	2200      	movs	r2, #0
- 80007b0:	2102      	movs	r1, #2
- 80007b2:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80007b6:	f000 fe73 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80007ba:	2200      	movs	r2, #0
- 80007bc:	2102      	movs	r1, #2
- 80007be:	4811      	ldr	r0, [pc, #68]	; (8000804 <main+0x494>)
+ 8000798:	2200      	movs	r2, #0
+ 800079a:	2102      	movs	r1, #2
+ 800079c:	4818      	ldr	r0, [pc, #96]	; (8000800 <main+0x490>)
+ 800079e:	f000 fe7f 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+ 80007a2:	2201      	movs	r2, #1
+ 80007a4:	2102      	movs	r1, #2
+ 80007a6:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80007aa:	f000 fe79 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+ 80007ae:	2200      	movs	r2, #0
+ 80007b0:	2101      	movs	r1, #1
+ 80007b2:	4814      	ldr	r0, [pc, #80]	; (8000804 <main+0x494>)
+ 80007b4:	f000 fe74 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80007b8:	2200      	movs	r2, #0
+ 80007ba:	2180      	movs	r1, #128	; 0x80
+ 80007bc:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80007c0:	f000 fe6e 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_Delay(250);
  80007c4:	20fa      	movs	r0, #250	; 0xfa
  80007c6:	f000 fbef 	bl	8000fa8 <HAL_Delay>
 
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
  80007ca:	2201      	movs	r2, #1
- 80007cc:	2180      	movs	r1, #128	; 0x80
- 80007ce:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80007d2:	f000 fe65 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
- 80007d6:	2200      	movs	r2, #0
- 80007d8:	2101      	movs	r1, #1
- 80007da:	4809      	ldr	r0, [pc, #36]	; (8000800 <main+0x490>)
- 80007dc:	f000 fe60 	bl	80014a0 <HAL_GPIO_WritePin>
+ 80007cc:	2102      	movs	r1, #2
+ 80007ce:	480c      	ldr	r0, [pc, #48]	; (8000800 <main+0x490>)
+ 80007d0:	f000 fe66 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+ 80007d4:	2200      	movs	r2, #0
+ 80007d6:	2102      	movs	r1, #2
+ 80007d8:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
+ 80007dc:	f000 fe60 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
  80007e0:	2200      	movs	r2, #0
- 80007e2:	2102      	movs	r1, #2
- 80007e4:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
- 80007e8:	f000 fe5a 	bl	80014a0 <HAL_GPIO_WritePin>
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
- 80007ec:	2200      	movs	r2, #0
- 80007ee:	2102      	movs	r1, #2
- 80007f0:	4804      	ldr	r0, [pc, #16]	; (8000804 <main+0x494>)
+ 80007e2:	2101      	movs	r1, #1
+ 80007e4:	4807      	ldr	r0, [pc, #28]	; (8000804 <main+0x494>)
+ 80007e6:	f000 fe5b 	bl	80014a0 <HAL_GPIO_WritePin>
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+ 80007ea:	2200      	movs	r2, #0
+ 80007ec:	2180      	movs	r1, #128	; 0x80
+ 80007ee:	f04f 4090 	mov.w	r0, #1207959552	; 0x48000000
  80007f2:	f000 fe55 	bl	80014a0 <HAL_GPIO_WritePin>
 		  HAL_Delay(50);
  80007f6:	2032      	movs	r0, #50	; 0x32
@@ -930,8 +930,8 @@ int main(void)
 	  HAL_UART_Receive(&huart2, &buf, 1, 1000);
  80007fc:	e6e2      	b.n	80005c4 <main+0x254>
  80007fe:	bf00      	nop
- 8000800:	48000400 	.word	0x48000400
- 8000804:	48001400 	.word	0x48001400
+ 8000800:	48001400 	.word	0x48001400
+ 8000804:	48000400 	.word	0x48000400
 
 08000808 <SystemClock_Config>:
 /**

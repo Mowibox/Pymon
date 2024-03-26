@@ -15,23 +15,32 @@ canPlay = False             # Possibilite de jouer ou non
 listAppend = True           # Ajout d'elements dans la sequence utilisateur
 lifeColor = (0, 255, 0)     # Couleur des points de vies 
 mirrorMode = False
+hard = False
 
 # Ouverture de la communication serie avec la STM32
-ser = serial.Serial("COM25", baudrate=38400)
+ports = serial.tools.list_ports.comports()
+stm32_port = None
+for port, desc, hwid in sorted(ports):
+    if "STMicroelectronics STLink Virtual COM Port" in desc:  # Vérification du descriptif pour trouver le port STM32
+        stm32_port = port
+        break
+
+ser = serial.Serial(stm32_port, baudrate=38400)
 
 # Formation de la suite aleatoire a deviner
 def memorylistMake(level):
-    memoryList = []
-    for i in range(level+2):
-        color = r.randint(0,3)
-        if color == 0:
-            memoryList.append(b'r')
-        elif color == 1:
-            memoryList.append(b'y')
-        elif color == 2:
-            memoryList.append(b'g')
-        elif color == 3:
-            memoryList.append(b'b')
+    if hard or level == 1:
+        memoryList = []
+        for i in range(level+2):
+            color = r.randint(0,3)
+            if color == 0:
+                memoryList.append(b'r')
+            elif color == 1:
+                memoryList.append(b'y')
+            elif color == 2:
+                memoryList.append(b'g')
+            elif color == 3:
+                memoryList.append(b'b')
     return memoryList
 
 # Verification de l'etat du jeu
@@ -228,7 +237,8 @@ while scene.isOpened():
                 time_elapsed = time.time()  
         elif time.time() - time_elapsed > 3:  
             time_elapsed = None
-            memoryList = memorylistMake(level)
+            if hard or level == 1:
+                memoryList = memorylistMake(level)
             for i in range(len(memoryList)):
                 ser.write(memoryList[i])
                 time.sleep(0.6)
@@ -352,6 +362,16 @@ while scene.isOpened():
         elif time.time() - time_elapsed > 2:  
             gameScene = 1
             canPlay = False
+            if not(hard):
+                color = r.randint(0,3)
+                if color == 0:
+                    memoryList.append(b'r')
+                elif color == 1:
+                    memoryList.append(b'y')
+                elif color == 2:
+                    memoryList.append(b'g')
+                elif color == 3:
+                    memoryList.append(b'b')
             level += 1
             time_elapsed = None
 
