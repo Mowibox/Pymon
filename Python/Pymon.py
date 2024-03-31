@@ -5,28 +5,30 @@ import random as r
 import serial
 import serial.tools.list_ports
 
-# Variables 
-gameScene = 0               # Gestion de l'etat du jeu
-time_elapsed = None         # Variable temporelle
-numberOfLives = 1           # Nombre de vies 
-level = 1                   # Niveau
-canPlay = False             # Possibilite de jouer ou non
-listAppend = True           # Ajout d'elements dans la sequence utilisateur
-lifeColor = (0, 255, 0)     # Couleur des points de vies 
-hard = False                # Mode difficile
-mirrorMode = False          # Mode miroir 
+# Variables
+gameScene = 0               # Game state management
+time_elapsed = None         # Time variable
+numberOfLives = 3           # Number of lives
+level = 1                   # Level
+canPlay = False             # Ability to play or not
+listAppend = True           # Add elements to the user sequence
+lifeColor = (0, 255, 0)     # Color of life points
+hard = False                # Difficulty management
+max_level_easy = 1          # Best score management  
+max_level_hard = 1          # Best score management  
 
-# Ouverture de la communication serie avec la STM32
+
+# Open serial communication with STM32
 ports = serial.tools.list_ports.comports()
 stm32_port = None
 for port, desc, hwid in sorted(ports):
-    if "STMicroelectronics STLink Virtual COM Port" in desc:  # Verification du descriptif pour trouver le port STM32
+    if "STMicroelectronics STLink Virtual COM Port" in desc:  # Check description to find STM32 port
         stm32_port = port
         break
 
 ser = serial.Serial(stm32_port, baudrate=38400)
 
-# Formation de la suite aleatoire a deviner
+# Generate the random sequence to guess
 def memorylistMake(level):
     if hard or level == 1:
         memoryList = []
@@ -42,33 +44,32 @@ def memorylistMake(level):
                 memoryList.append(b'b')
     return memoryList
 
-# Verification de l'etat du jeu
+# Check the game state
 def listCompare(playerList, memoryList):
     n = len(playerList)
     if n != 0:
         if playerList[n-1] == memoryList[n-1]:
             if n == len(memoryList):
-                return 1 # Niveau reussi
+                return 1 # Level passed
             else:
-                return 0 # Pas d'erreurs, le jeu continue
+                return 0 # No errors, game continues
         else:
-            return 2 #Erreur ! 
+            return 2 # Error!
     else:
-        return 0 # Rien ne se passe
+        return 0 # Nothing happens
 
-
-# Detection des mains
+# Hands detection
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7, min_tracking_confidence=0.6)
 
-# Creation de la scene
+# Scene creation
 scene = cv2.VideoCapture(0)
 
-# Dimensionnement de la fenêtre
+# Window sizing
 cv2.namedWindow('Pymon', cv2.WINDOW_NORMAL)
 scene.set(3, 1280)
 
-# Classe pour la gestion des boutons de selection
+# Class for button management
 class Button:
     def __init__(self, x, y, width, height, text=None):
         self.x = x
@@ -77,7 +78,7 @@ class Button:
         self.height = height
         self.text = text
 
-    # Dessin du rectangle dans la zone de jeu
+    # Draw the rectangle in the game area
     def draw(self, frame, color):
         cv2.rectangle(frame, (self.x, self.y), (self.x + self.width, self.y + self.height), color, 8)
         if self.text:
@@ -86,14 +87,14 @@ class Button:
             text_y = self.y - 10 + (self.height + text_size[1]) // 2
             cv2.putText(frame, self.text, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 4)
 
-    # Gestion des intersections avec la main
+    # Handle intersections with the hand
     def intersects(self, other_rect):
         return self.x < other_rect.x + other_rect.width and \
                self.x + self.width > other_rect.x and \
                self.y < other_rect.y + other_rect.height and \
                self.y + self.height > other_rect.y
 
-#Texte
+# Text
 class Text:
     def __init__(self, x, y, text, font_scale=1, color=(255, 255, 255), thickness=2, font=cv2.FONT_HERSHEY_SIMPLEX):
         self.x = x
@@ -112,16 +113,14 @@ class Text:
 
     def update_color(self, color):
         self.color = color
-        
 
-
-# Boutons & Texte
+# Buttons & Texts
 StartButton = Button(60, 50, 250, 150, 'Start')
 SettingsButton = Button(950, 50, 250, 150, 'Settings')
 
-PlayerButton = Button(60, 50, 250, 150, 'Joueur')
-DifficultyButton = Button(950, 50, 250, 150, 'Difficulte')
-BackButton = Button(60, 550, 250, 150, 'Retour')
+PlayerButton = Button(60, 50, 250, 150, 'Player')
+DifficultyButton = Button(950, 50, 250, 150, 'Difficulty')
+BackButton = Button(60, 550, 250, 150, 'Back')
 RankingButton = Button(950, 550, 250, 150, 'Score')
 
 RedButton = Button(50, 30, 250, 150, 'Red')
@@ -129,28 +128,29 @@ YellowButton = Button(960, 30, 250, 150, 'Yellow')
 GreenButton = Button(50, 550, 250, 150, 'Green')
 BlueButton = Button(960, 550, 250, 150, 'Blue')
 
-gameText = Text(370, 400, "Regardez la sequence lumineuse...")
-levelText = Text(560, 560, "Niveau : {}".format(level), color=(0, 0, 0))
-livesText = Text(560, 50, "Vies : {}".format(numberOfLives))
+gameText = Text(370, 400, "Watch the light sequence...")
+LevelText = Text(580, 560, "Level: {}".format(level), color=(0, 0, 0))
+livesText = Text(560, 50, "Lives: {}".format(numberOfLives))
+newRecordText = Text(550, 520, "New record!", color=(0, 230, 245))
 
-EasyButton = Button(950, 50, 250, 150, 'Facile')
-HardButton = Button(60, 50, 250, 150, 'Difficile')
+EasyButton = Button(950, 50, 250, 150, 'Easy')
+HardButton = Button(60, 50, 250, 150, 'Hard')
 
-#Logo 
+bestScoreText = Text(560, 50, "Best score", color=(0, 230, 245))
+scoreEasyText = Text(470, 490, "Easy mode - Level: {}".format(max_level_easy), color=(0, 0, 0))
+scoreHardText = Text(470, 540, "Hard mode - Level: {}".format(max_level_hard), color=(0, 0, 0))
+
+# Logo
 logo = cv2.imread('Python\img\Pymonlogo.png')
 logo = cv2.resize(logo, (150,150))
 
-# Affichage de la scene
+# Display the scene
 while scene.isOpened():
     ret, frame = scene.read()
     if not ret:
         break
 
-    # Miroitage de la scene
-    if mirrorMode:
-        frame = cv2.flip(frame, -1)
-    else:
-        frame = cv2.flip(frame, 1)
+    frame = cv2.flip(frame, 1)
 
     # Menu
     if gameScene == 0 :
@@ -174,12 +174,12 @@ while scene.isOpened():
         EasyButton.draw(frame, (0, 0, 0))
         HardButton.draw(frame, (0, 0, 0))
 
-    # Detection des mains
+    # Hand detection
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = hands.process(gray)
 
-    hand_rect = None  # Initialisation du rectangle de selection
-    # Dessin de rectangle de selection
+    hand_rect = None  # Initialize selection rectangle
+    # Draw selection rectangle
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
             x_min, y_min, x_max, y_max = float('inf'), float('inf'), 0, 0
@@ -196,8 +196,8 @@ while scene.isOpened():
             cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (255, 0, 200), 6)
             hand_rect = Button(x_min, y_min, x_max - x_min, y_max - y_min) 
 
-    # Chevauchement
-    if gameScene == 0:
+    # Overlap
+    if gameScene == 0: # Menu
         if hand_rect is not None:
             if StartButton.intersects(hand_rect):
                 ser.write(b'n')
@@ -206,7 +206,7 @@ while scene.isOpened():
                     time_elapsed = time.time()  
                 elif time.time() - time_elapsed > 2:
                     time_elapsed = None  
-                    gameScene = 1 # Jeu   
+                    gameScene = 1 # Game   
             else:
                 StartButton.draw(frame, (0, 0, 0))
                 
@@ -221,7 +221,7 @@ while scene.isOpened():
                     time_elapsed = time.time()  
                 elif time.time() - time_elapsed > 2:
                     time_elapsed = None  
-                    gameScene = 2 # Paramètres
+                    gameScene = 2 # Settings
                     
             else:
                 SettingsButton.draw(frame, (0, 0, 0))
@@ -230,17 +230,17 @@ while scene.isOpened():
             time_elapsed = None
             ser.write(b'm')
 
-    if gameScene == 1 and not(canPlay):
+    if gameScene == 1 and not(canPlay): # Observation of sequence
         gameText.update_color((0, 0, 0))
-        gameText.update_text("Regardez la sequence lumineuse...")
-        levelText.update_text("Niveau : {}".format(level))
-        livesText.update_text("Vies : {}".format(numberOfLives))
+        gameText.update_text("Watch the light sequence...")
+        LevelText.update_text("Level: {}".format(level))
+        livesText.update_text("Lives: {}".format(numberOfLives))
         livesText.update_color(lifeColor)
         livesText.draw(frame)
-        levelText.draw(frame)
+        LevelText.draw(frame)
         gameText.draw(frame)
 
-        #  Creation de la sequence a realiser
+        # Create the sequence to be performed
         if time_elapsed is None:
                 ser.write(b'n')
                 time_elapsed = time.time()  
@@ -257,26 +257,26 @@ while scene.isOpened():
             canPlay = True
             
 
-    if gameScene == 1 and canPlay:
-        levelText.update_text("Niveau : {}".format(level))
-        livesText.update_text("Vies : {}".format(numberOfLives))
+    if gameScene == 1 and canPlay: # Game space
+        LevelText.update_text("Level: {}".format(level))
+        livesText.update_text("Lives: {}".format(numberOfLives))
         livesText.update_color(lifeColor)
         livesText.draw(frame)
-        levelText.draw(frame)
+        LevelText.draw(frame)
 
-        status = listCompare(playerList, memoryList) # Verification de l'etat du niveau
-        if status == 1: # Niveau reussi
+        status = listCompare(playerList, memoryList) # Check the level state
+        if status == 1: # Level passed
             gameScene = 3
-        elif status == 2: # Erreur !
+        elif status == 2: # Error!
             numberOfLives-=1
             if numberOfLives <= 0: # GAME OVER
                 gameScene = 5
             else:
                 gameScene = 4
         gameText.update_color((0, 0, 0))
-        gameText.update_text("A vous de jouer !")
+        gameText.update_text("Your turn!")
         gameText.draw(frame)
-        if hand_rect is not None: # Contact rouge 
+        if hand_rect is not None: # Red contact
             if RedButton.intersects(hand_rect):
                 RedButton.draw(frame, (255, 0, 255))
                 if listAppend:
@@ -284,14 +284,14 @@ while scene.isOpened():
                     listAppend = False
                 ser.write(b'r')   
 
-            elif YellowButton.intersects(hand_rect): # Contact jaune 
+            elif YellowButton.intersects(hand_rect): # Yellow contact
                 YellowButton.draw(frame, (255, 0, 255)) 
                 if listAppend:
                     playerList.append(b'y') 
                     listAppend = False
                 ser.write(b'y')  
          
-            elif GreenButton.intersects(hand_rect): # Contact vert
+            elif GreenButton.intersects(hand_rect): # Green contact
                 GreenButton.draw(frame, (255, 0, 255)) 
                 if listAppend:
                     playerList.append(b'g') 
@@ -299,7 +299,7 @@ while scene.isOpened():
                 ser.write(b'g') 
    
 
-            elif BlueButton.intersects(hand_rect): # Contact bleu
+            elif BlueButton.intersects(hand_rect): # Blue contact
                 BlueButton.draw(frame, (255, 0, 255)) 
                 if listAppend:
                     playerList.append(b'b') 
@@ -315,7 +315,7 @@ while scene.isOpened():
                     listAppend = True
                 ser.write(b'n')
     
-    if gameScene == 2:
+    if gameScene == 2:  # Settings
         if hand_rect is not None:
             if BackButton.intersects(hand_rect):
                 ser.write(b'n')
@@ -324,7 +324,7 @@ while scene.isOpened():
                     time_elapsed = time.time()  
                 elif time.time() - time_elapsed > 2:  
                     time_elapsed = None
-                    gameScene = 0 # Retour au menu 
+                    gameScene = 0 # Back to menu 
 
             elif DifficultyButton.intersects(hand_rect):
                 ser.write(b'n')
@@ -333,10 +333,21 @@ while scene.isOpened():
                     time_elapsed = time.time()  
                 elif time.time() - time_elapsed > 2:  
                     time_elapsed = None
-                    gameScene = 6 # Difficulte
+                    gameScene = 6 # Difficulty
+            
+            elif RankingButton.intersects(hand_rect):
+                ser.write(b'n')
+                RankingButton.draw(frame, (255, 0, 255)) 
+                if time_elapsed is None:
+                    time_elapsed = time.time()  
+                elif time.time() - time_elapsed > 2:  
+                    time_elapsed = None
+                    gameScene = 7 # Max Score            
+
             else:
                 BackButton.draw(frame, (0, 0, 0))
                 DifficultyButton.draw(frame, (0, 0, 0))
+                RankingButton.draw(frame, (0, 0, 0))
 
         elif hand_rect is not None:
             if BackButton.intersects(hand_rect):
@@ -346,7 +357,7 @@ while scene.isOpened():
                     time_elapsed = time.time()  
                 elif time.time() - time_elapsed > 2:  
                     time_elapsed = None
-                    gameScene = 0 # Jeu  
+                    gameScene = 0 # Game  
             else:
                 BackButton.draw(frame, (0, 0, 0))
                 
@@ -354,15 +365,15 @@ while scene.isOpened():
             time_elapsed = None
             ser.write(b'm')
 
-    if gameScene == 3:  # Niveau complet
+    if gameScene == 3:  # Level complete
         ser.write(b'n')
-        gameText.update_text("Bravo ! Passons au niveau suivant !")
+        gameText.update_text("Congratulations! Next level!")
         gameText.update_color((0, 220, 0))
-        livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_text("Lives: {}".format(numberOfLives))
         livesText.update_color(lifeColor)
         livesText.draw(frame)
-        levelText.update_text("Niveau : {}".format(level))
-        levelText.draw(frame)
+        LevelText.update_text("Level: {}".format(level))
+        LevelText.draw(frame)
         gameText.draw(frame)
         if time_elapsed is None:
                 time_elapsed = time.time()  
@@ -382,16 +393,16 @@ while scene.isOpened():
             level += 1
             time_elapsed = None
 
-    if gameScene == 4:
+    if gameScene == 4: # Level failure
         ser.write(b'n')
-        gameText.update_text("Ce n'est pas ca, Essaie encore...")
+        gameText.update_text("Try again...")
         gameText.update_color((0, 0, 220))
         gameText.draw(frame)
-        livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_text("Lives: {}".format(numberOfLives))
         livesText.update_color(lifeColor)
         livesText.draw(frame)
-        levelText.update_text("Niveau : {}".format(level))
-        levelText.draw(frame)
+        LevelText.update_text("Level: {}".format(level))
+        LevelText.draw(frame)
         if time_elapsed is None:
                 time_elapsed = time.time()  
         elif time.time() - time_elapsed > 2:  
@@ -399,16 +410,25 @@ while scene.isOpened():
             canPlay = False
             time_elapsed = None
 
-    if gameScene == 5:
+    if gameScene == 5: # GAME OVER 
         ser.write(b'n')
         gameText.update_text("GAME OVER...")
         gameText.update_color((0, 0, 180))
-        livesText.update_text("Vies : {}".format(numberOfLives))
+        livesText.update_text("Lives: {}".format(numberOfLives))
         livesText.update_color(lifeColor)
         livesText.draw(frame)
-        levelText.update_text("Niveau : {}".format(level))
-        levelText.draw(frame)
+        LevelText.update_text("Level: {}".format(level))
+        LevelText.draw(frame)
         gameText.draw(frame)
+        if not(hard):
+            if level >= max_level_easy:
+                max_level_easy = level
+                newRecordText.draw(frame)
+        else:
+            if level >= max_level_hard:
+                max_level_hard = level
+                newRecordText.draw(frame)
+
         if time_elapsed is None:
                 time_elapsed = time.time()  
         elif time.time() - time_elapsed > 3:  
@@ -418,8 +438,8 @@ while scene.isOpened():
             canPlay = False
             time_elapsed = None
     
-    # Difficulte du jeu 
-    if gameScene == 6:
+
+    if gameScene == 6: # Difficulty selection
         if hand_rect is not None:
             if EasyButton.intersects(hand_rect):
                 hard = False
@@ -434,25 +454,45 @@ while scene.isOpened():
                     time_elapsed = time.time()  
                 elif time.time() - time_elapsed > 2:  
                     time_elapsed = None
-                    gameScene = 2 # Retour aux parametres 
+                    gameScene = 2 # Back to settings 
             else:
                 BackButton.draw(frame, (0, 0, 0))
 
         if hard:
-            gameText.update_text("La sequence change entierement a chaque niveau")
+            gameText.update_text("The sequence changes completely each level")
             gameText.update_color((0, 0, 0))
             gameText.draw(frame)
             HardButton.draw(frame, (0, 80, 255)) 
             EasyButton.draw(frame, (0, 0, 0))
         else:
-            gameText.update_text("Une couleur s'ajoute a la sequence de base")
+            gameText.update_text("One color is added to the basic sequence")
             gameText.update_color((0, 0, 0))
             gameText.draw(frame)
             EasyButton.draw(frame, (80, 255, 0)) 
-            HardButton.draw(frame, (0, 0, 0))     
-               
+            HardButton.draw(frame, (0, 0, 0))   
+
+    if gameScene == 7: # Score display
+        scoreEasyText.update_text("Easy mode - Level: {}".format(max_level_easy))
+        scoreHardText.update_text("Hard mode - Level: {}".format(max_level_hard))
+        bestScoreText.draw(frame)
+        scoreEasyText.draw(frame)
+        scoreHardText.draw(frame)
+        if hand_rect is not None:
+            if BackButton.intersects(hand_rect):
+                ser.write(b'n')
+                BackButton.draw(frame, (255, 0, 255)) 
+                if time_elapsed is None:
+                    time_elapsed = time.time()  
+                elif time.time() - time_elapsed > 2:  
+                    time_elapsed = None
+                    gameScene = 2 # Back to settings 
+            else:
+                BackButton.draw(frame, (0, 0, 0))
+        else:
+            BackButton.draw(frame, (0, 0, 0))
         
-    # Coloration du texte des vies
+        
+    # Text coloration of lives
     if numberOfLives == 3:
         lifeColor = (0, 255, 0)
     elif numberOfLives == 2:
@@ -460,24 +500,24 @@ while scene.isOpened():
     elif numberOfLives == 1:
         lifeColor = (0, 0, 255)
 
-    # Centrage du texte principal
+    # Centering the main text
     text_size = cv2.getTextSize(gameText.text, cv2.FONT_HERSHEY_SIMPLEX, gameText.font_scale, 2)[0]
     text_x = (frame.shape[1] - text_size[0]) // 2
     text_y = (frame.shape[0] + text_size[1]) // 2
     gameText.x = text_x
     gameText.y = text_y
 
-    # Affichage du logo
+    # Display logo
     frame[570:570+logo.shape[0], 565:565+logo.shape[1]] = logo 
            
-    # Titre du jeu
+    # Game title
     cv2.imshow('Pymon', frame)
 
-    # Fin du jeu lorsque l on appuie sur q
+    # End game on pressing q
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
-# Fermeture de la scene
+# Close scene
 scene.release()
 cv2.destroyAllWindows()
 ser.close()
