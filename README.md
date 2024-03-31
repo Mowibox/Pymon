@@ -1,9 +1,7 @@
 # Pymon
 Game project developed with OpenCV and STM32 for the Image & Virtual Reality Workshop.
 
-<div class="text-center">
-    <img src="img/Pymonlogo.png" alt="Pymon Logo" width="200">
-</div>
+<img src="img/Pymonlogo.png" alt="Pymon Logo" width="200">
 
 # About the game
 Pymon is a Python derivative of the game Simon where the objective is to memorize and reproduce sequences of random colors.
@@ -12,9 +10,8 @@ The unique aspect of Pymon is that the game interface is created using the playe
 
 Serial communication is established with the game box to retrieve player inputs.
 
-<div class="text-center">
-    <img src="img/Pymonbox.jpg" alt="Pymon Game Box" width="200">
-</div>
+<img src="img/Pymonbox.png" alt="Pymon Game Box" width="200">
+
 
 
 # How to play? 
