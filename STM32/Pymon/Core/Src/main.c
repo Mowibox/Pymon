@@ -107,67 +107,80 @@ int main(void)
   Buzzer_Init(&hbuzzer, &buzzerConfig);
   Buzzer_Start(&hbuzzer);
 
+  GPIO_TypeDef * Red_GPIO = GPIOF;
+  uint16_t Red_PIN = GPIO_PIN_1;
+
+  GPIO_TypeDef * Yellow_GPIO = GPIOA;
+  uint16_t Yellow_PIN = GPIO_PIN_1;
+
+  GPIO_TypeDef * Green_GPIO = GPIOB;
+  uint16_t Green_PIN = GPIO_PIN_0;
+
+  GPIO_TypeDef * Blue_GPIO = GPIOA;
+  uint16_t Blue_PIN = GPIO_PIN_7;
+
+
   //Boot sequence
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
   Buzzer_Note(&hbuzzer, NOTE_C4);
   HAL_Delay(200);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Blue_GPIO, GPIO_PIN_7, GPIO_PIN_RESET);
   Buzzer_Note(&hbuzzer, NOTE_D4);
   HAL_Delay(200);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
   Buzzer_Note(&hbuzzer, NOTE_E4);
   HAL_Delay(200);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_SET);
   Buzzer_Note(&hbuzzer, NOTE_F4);
   HAL_Delay(200);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
   Buzzer_Note(&hbuzzer, NOTE_G4);
   HAL_Delay(200);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
   Buzzer_Note(&hbuzzer, NOTE_A4);
   HAL_Delay(200);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
   Buzzer_Note(&hbuzzer, NOTE_B4);
   HAL_Delay(200);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_SET);
   Buzzer_Note(&hbuzzer, NOTE_C5);
   HAL_Delay(500);
 
-  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
   Buzzer_Note(&hbuzzer, 0);
 
 
@@ -184,75 +197,75 @@ int main(void)
 
 	  //Red color
 	  if (buf == 'r'){
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_C4);
 	  }
 	  //Yellow color
 	  else if (buf == 'y'){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_D4);
 	  }
 	  //Green color
 	  else if (buf == 'g'){
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_E4);
 	  }
 	  //Blue color
 	  else if (buf == 'b'){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_SET);
 		  Buzzer_Note(&hbuzzer, NOTE_F4);
 	  }
 	  //None
 	  else if (buf == 'n'){
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
 		  Buzzer_Note(&hbuzzer, 0);
 	  }
 
 	  //Main menu sequence
 	  else if (buf == 'm'){
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
 		  HAL_Delay(250);
 
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
 		  HAL_Delay(250);
 
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
 		  HAL_Delay(250);
 
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_SET);
 		  HAL_Delay(250);
 
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
 		  HAL_Delay(250);
 
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
 		  HAL_Delay(250);
 
-		  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_1, GPIO_PIN_SET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Red_GPIO, Red_PIN, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(Yellow_GPIO, Yellow_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Green_GPIO, Green_PIN, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(Blue_GPIO, Blue_PIN, GPIO_PIN_RESET);
 		  HAL_Delay(50);
 
 	  }

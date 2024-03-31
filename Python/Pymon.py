@@ -14,8 +14,8 @@ canPlay = False             # Ability to play or not
 listAppend = True           # Add elements to the user sequence
 lifeColor = (0, 255, 0)     # Color of life points
 hard = False                # Difficulty management
-max_level_easy = 1          # Best score management  
-max_level_hard = 1          # Best score management  
+max_level_easy = 1          # Best score easy mode management  
+max_level_hard = 1          # Best score hard mode management  
 
 
 # Open serial communication with STM32
