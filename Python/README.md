@@ -8,7 +8,7 @@ The menu allows us to access settings or start the game.
 ### Game
 Buttons of 4 colors are displayed on the screen. The game prompts the player to watch the sequence of colors made on the device, then replicate it. Each successful level increases the sequence length by 1. Mistakes deduct life points until game over.
 
-![Pymon Game](img/Game.png)
+![Pymon Game](./img/Game.png)
 
 ### Settings
 Settings provide access to Score, Difficulty, and Player sections.
