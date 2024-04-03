@@ -1,0 +1,4 @@
+../Core/Src/buzzer.c:10:6:Buzzer_Note	16	static
+../Core/Src/buzzer.c:19:6:Buzzer_NoNote	16	static
+../Core/Src/buzzer.c:23:6:Buzzer_Init	16	static
+../Core/Src/buzzer.c:27:6:Buzzer_Start	16	static
