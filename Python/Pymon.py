@@ -1,3 +1,12 @@
+"""
+    @file        Pymon.py
+    @author      Mowibox (Ousmane THIONGANE)
+    @brief       Game project developed with OpenCV and STM32 for the Image & Virtual Reality Workshop
+    @version     1.0
+    @date        2022-04-01
+    
+"""
+
 import cv2
 import mediapipe as mp
 import time
