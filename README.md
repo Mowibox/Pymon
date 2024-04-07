@@ -6,7 +6,7 @@ Game project developed with OpenCV and STM32 for the Image & Virtual Reality Wor
 # About the game
 Pymon is a Python derivative of the game Simon where the objective is to memorize and reproduce sequences of random colors.
 
-The unique aspect of' Pymon is that the game interface is created using the player's computer camera, and color selection is done directly on the screen by hand detection.
+The unique aspect of Pymon is that the game interface is created using the player's computer camera, and color selection is done directly on the screen by hand detection.
 
 Serial communication is established with the game box to retrieve player inputs.
 
