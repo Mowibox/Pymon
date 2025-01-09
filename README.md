@@ -12,21 +12,15 @@ Serial communication is established with the game box to retrieve player inputs.
 
 # How to play? 
 Clone this repository to your computer:
-```
+```bash
 git clone https://github.com/Mowibox/Pymon.git
 ```
 Connect the game device to your computer; a sound sequence should play if everything is working correctly.
 
-Open the "Pymon.py" file in the Python folder. Install the following libraries:
+Open the `main.py` file in the Python folder and install the libraries by using the requirements file:
+```bash
+pip install -r requirements.txt
 ```
-pip install open-cv python
-```
-```
-pip install mediapipe
-```
-```
-pip install pyserial
-```
-Run the code and have fun!
+Have fun!
 
 ![Pymon Game Box](./img/Pymonbox.jpg)
