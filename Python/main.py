@@ -128,7 +128,7 @@ def main():
             if status == 1:
                 if time_elapsed is None:
                     time_elapsed = time.time()  
-                elif time.time() - time_elapsed > 0.5:  
+                elif time.time() - time_elapsed > 0.3:  
                     time_elapsed = None
                     gameState = GameState.LEVEL_COMPLETE
             elif status == 2:
@@ -196,13 +196,13 @@ def main():
                 if not(hard):
                     color = r.randint(0,3)
                     if color == 0:
-                        memoryList.append(ColorBGR.RED.value)
+                        memoryList.append(ColorBox.RED.value)
                     elif color == 1:
-                        memoryList.append(ColorBGR.YELLOW.value)
+                        memoryList.append(ColorBox.YELLOW.value)
                     elif color == 2:
-                        memoryList.append(ColorBGR.GREEN.value)
+                        memoryList.append(ColorBox.GREEN.value)
                     elif color == 3:
-                        memoryList.append(ColorBGR.BLUE.value)
+                        memoryList.append(ColorBox.BLUE.value)
                 level += 1
                 time_elapsed = None
 
@@ -381,7 +381,8 @@ def main():
         elif numberOfLives == 1:
             lifeColor = ColorBGR.RED
 
-        frame[570:570+logo.shape[0], 565:565+logo.shape[1]] = logo 
+        frame[int(FRAME_WIDTH*0.44):int(FRAME_WIDTH*0.44)+logo.shape[0], 
+              int(FRAME_HEIGHT*0.79):int(FRAME_HEIGHT*0.79)+logo.shape[1]] = logo 
             
         cv2.imshow('Pymon', frame)
 

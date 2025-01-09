@@ -26,7 +26,7 @@ def find_box_port(baudrate: int=38400) -> serial.Serial:
     ports = serial.tools.list_ports.comports()
     stm32_port = None
     for port, desc, _ in sorted(ports):
-        if "STM32" in desc:  # Check port description to find STM32 port
+        if "STM" in desc:  # Check port description to find STM32 port
             stm32_port = port
             break
 
@@ -81,11 +81,10 @@ def generateSequence(level: int) -> list:
 
     @param level: The game level
     """
-    if hard or level == 1:
-        memoryList = []
-        for _ in range(level+2):
-            color = r.choice(list(ColorBox)[:-2]).value
-            memoryList.append(color)
+    memoryList = []
+    for _ in range(level+2):
+        color = r.choice(list(ColorBox)[:-2]).value
+        memoryList.append(color)
     return memoryList
 
 

@@ -83,7 +83,7 @@ class Button:
     
 
 class Text:
-    def __init__(self, x, y, text, font_scale=1, color=ColorBGR.BLACK, thickness=2, font=cv2.FONT_HERSHEY_SIMPLEX):
+    def __init__(self, x, y, text, font_scale=1, color=ColorBGR.BLACK, thickness=3, font=cv2.FONT_HERSHEY_SIMPLEX):
         self.x = x
         self.y = y
         self.text = text
