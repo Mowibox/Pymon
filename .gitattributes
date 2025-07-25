@@ -1,4 +1,4 @@
-STM32/Pymon/Drivers/** linguist-vendored
-STM32/Pymon/Drivers/** linguist-detectable=false
-STM32/Pymon/Debug/** linguist-vendored
-STM32/Pymon/Debug/** linguist-detectable=false
+/STM32/Pymon/Drivers/** linguist-vendored
+/STM32/Pymon/Drivers/** linguist-detectable=false
+/STM32/Pymon/Debug/** linguist-vendored
+/STM32/Pymon/Debug/** linguist-detectable=false
