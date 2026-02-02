@@ -16,7 +16,7 @@ The pin configuration is as follows:
 |  Yellow LED |    PB0     |     D3      |  GPIO_Output  |
 |  Green LED  |    PA1     |     D8      |  GPIO_Output  |
 |   Blue LED  |    PF1     |     A1      |  GPIO_Output  |
-|   Buzzer    |    PA8     |     D9      |   TIM3_CH1    |
+|   Buzzer    |    PA6     |     A5      |   TIM3_CH1    |
 
 Channel 1 of Timer 3 is activated to generate a PWM signal, allowing the buzzer to be used.
 
