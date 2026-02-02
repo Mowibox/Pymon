@@ -1,4 +1,5 @@
 # STM32 Pymon
+
 This directory houses the microcontroller part of Pymon.
 
 ## Configuration
@@ -17,7 +18,6 @@ The pin configuration is as follows:
 |   Blue LED  |    PF1     |     A1      |  GPIO_Output  |
 |   Buzzer    |    PA8     |     D9      |   TIM3_CH1    |
 
-
 Channel 1 of Timer 3 is activated to generate a PWM signal, allowing the buzzer to be used.
 
-The buzzer library and how to integrate it into a project are specified in this repository: [https://github.com/brapacz/stm32-buzzer](https://github.com/brapacz/stm32-buzzer)
+The buzzer library and how to integrate it into a project are specified the following [repository](https://github.com/brapacz/stm32-buzzer)
