@@ -262,7 +262,6 @@ cython_debug/
 # Misc
 *.map
 *.m
-*.png
 
 # Eclipse CDT project files
 .cproject
